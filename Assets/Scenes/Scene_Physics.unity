@@ -420,6 +420,8 @@ GameObject:
   m_Component:
   - component: {fileID: 122391755}
   - component: {fileID: 122391756}
+  - component: {fileID: 122391758}
+  - component: {fileID: 122391757}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -452,6 +454,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8980178a5116a064399d39008302144c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireBallWeapon: {fileID: 122391758}
+  _axeBallWeapon: {fileID: 122391757}
+--- !u!114 &122391757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122391754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63232b17fc5495542bba437cc4c3c5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _axeBall: {fileID: 2622351116122189604, guid: 2804cd56edc81484d86026efdce3c7dd, type: 3}
+--- !u!114 &122391758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122391754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad241fe77a853b645b0e80052e7594ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _fireBall: {fileID: 2622351116122189604, guid: 7e5527994a7bd474ebfcfcdd8fe0d97a, type: 3}
