@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class SC_Weapon : MonoBehaviour
 {
-    public GameObject _fireBall;
+    public SC_FireballWeapon _fireBallWeapon;
+    public SC_AxeWeapon _axeBallWeapon;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl) && _fireBall != null)
-        {
-            GameObject fireBall = Instantiate(_fireBall,transform.position,new Quaternion());
-            SC_FireBall scFireball = fireBall.GetComponent<SC_FireBall>();
-            if(scFireball != null)
-            {
-                float direction = 1;
-                if(transform.parent != null)
-                    direction = transform.parent.localScale.x;
-                scFireball.Shoot(direction);
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.LeftControl) && _fireBallWeapon != null)
+            _fireBallWeapon.Shoot();
+
+        if (Input.GetKeyDown(KeyCode.Z) && _axeBallWeapon != null)
+            _axeBallWeapon.Shoot();
     }
+
+
+
 }
