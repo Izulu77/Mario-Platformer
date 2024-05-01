@@ -14,6 +14,9 @@ public class SC_Weapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z) && _axeBallWeapon != null)
             _axeBallWeapon.Shoot();
+
+        if (Input.GetKeyDown(KeyCode.X) && _axeBallWeapon != null)
+            _axeBallWeapon.Reload();
     }
 
 
