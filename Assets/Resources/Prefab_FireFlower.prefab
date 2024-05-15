@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5435404411258377251}
   - component: {fileID: 3284855268752497977}
   m_Layer: 0
-  m_Name: Sprite_FireFlower
+  m_Name: Prefab_FireFlower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
