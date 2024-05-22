@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class BuildLevel : EditorWindow
+public class BuildLevel : EditorWindow, ICreateLevel
 {
     private TextAsset _curLevel;
     private GameObject _world;
@@ -29,8 +29,7 @@ public class BuildLevel : EditorWindow
         }
     }
 
-    //try to replace with reflections
-    private void CreateLevel()
+    public void CreateLevel()
     {
         Debug.Log("Starting to create a level from file: " + _curLevel.name);
         try 
@@ -50,16 +49,26 @@ public class BuildLevel : EditorWindow
                     List<object> levelTiles = (List<object>)layerData["data"];
                     for(int i = 0; i < levelTiles.Count;i++)
                     {
-                        switch(levelTiles[i].ToString())
+                        try
                         {
-                            case "1": CreateGameObject("Prefab_FireFlower", i, height, width); break;
-                            case "2": CreateGameObject("Prefab_Star", i, height, width); break;
-                            case "3": CreateGameObject("Prefab_Mario", i, height, width); break;
-                            case "4": CreateGameObject("Prefab_Floor", i, height, width); break;
-                            case "5": CreateGameObject("Prefab_Coin", i, height, width); break;
-                            case "6": CreateGameObject("Prefab_Spikes", i, height, width); break;
-                            case "7": CreateGameObject("Prefab_Key", i, height, width); break;
+                            GameObject temp = Instantiate(Resources.Load(levelTiles[i].ToString())) as GameObject;
+                            Vector2Int pos = CalculatePosition(i, height, width);
+
+                            string col = (pos.x).ToString();
+                            if (pos.x < 10)
+                                col = "0" + (pos.x).ToString();
+
+                            string row = pos.y.ToString();
+                            if (pos.y < 10)
+                                row = "0" + pos.y.ToString();
+
+                            temp.name = row + col;
+                            temp.transform.localPosition = new Vector3(pos.x, pos.y, 0);
+
+                            if (_world != null)
+                                temp.transform.SetParent(_world.transform);
                         }
+                        catch(Exception e) { Debug.LogError(e); }
                     }
                 }
             }
@@ -70,23 +79,12 @@ public class BuildLevel : EditorWindow
         }
     }
 
-    private void CreateGameObject(string prefabName,int index,int height, int width)
+    //insert to DLL
+    private Vector2Int CalculatePosition(int index, int height, int width)
     {
-        GameObject temp = Instantiate(Resources.Load(prefabName)) as GameObject;
         int colCalc = index % width;
-        string col = (colCalc).ToString();
-        if (colCalc < 10)
-            col = "0" + (colCalc).ToString();
-
         int rowCalc = (int)((height - 1) - ((int)(index / width)));
-        string row = rowCalc.ToString();
-        if (rowCalc < 10)
-            row = "0" + rowCalc.ToString();
-
-        temp.name = row + col;
-        temp.transform.localPosition = new Vector3(colCalc, rowCalc, 0);
-
-        if (_world != null)
-            temp.transform.SetParent(_world.transform);
+        return new Vector2Int(colCalc, rowCalc);
     }
+
 }
