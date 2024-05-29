@@ -5,18 +5,9 @@ using UnityEngine;
 public class SC_Jump : MonoBehaviour
 {
     public float jumpSpeed = 100;
-    private bool isJumping = false;
+    private bool isGrounded = false;
 
     private Rigidbody2D rigid;
-    private void OnEnable()
-    {
-        SC_Floor.OnFloorCollision += OnFloorCollision;
-    }
-
-    private void OnDisable()
-    {
-        SC_Floor.OnFloorCollision -= OnFloorCollision;
-    }
 
     void Awake()
     {
@@ -25,19 +16,14 @@ public class SC_Jump : MonoBehaviour
 
     private void Jump()
     {
-        if (isJumping == false)
-        {
-            rigid.AddForce(new Vector2(0, jumpSpeed));
-            isJumping = true;
-        }
+       rigid.velocity = Vector3.zero;
+       rigid.AddForce(new Vector2(0, jumpSpeed));
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        isGrounded = transform.IsGrounded(LayerMask.GetMask("Default"));
+        
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
             Jump();
-    }
-    private void OnFloorCollision()
-    {
-        isJumping = false;
     }
 }

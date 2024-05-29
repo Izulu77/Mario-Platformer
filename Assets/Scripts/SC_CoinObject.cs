@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class SC_Coin : MonoBehaviour
+public class SC_CoinObject : MonoBehaviour
 {
     public delegate void CoinCollisionHandler();
     public static event CoinCollisionHandler OnCoinCollision;
