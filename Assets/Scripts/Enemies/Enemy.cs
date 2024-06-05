@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICreateLevel
+public abstract class Enemy : MonoBehaviour
 {
-    void CreateLevel();
+    public abstract void Initilize();
 }
